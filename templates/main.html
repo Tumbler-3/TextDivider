@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Extraction</title>
+</head>
+
+<body>
+    <div class="container">
+        {% if not image %}
+        <div class="upload">
+            <h2>Upload Your Image</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" name="send_image">Upload Image</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if image %}
+        <div class="image">
+            <h2>Image with Text</h2>
+            <img src="/media/{{image}}/">
+            <button class="reveal" id="Ext">Extract Text from Image</button>
+        </div>
+
+        <div class="text" id="recog">
+            <h2>Extracted Text</h2>
+            {% for row in text %}
+            <ul>
+                {%for word in row%}
+                <img src="{{word}}" alt="" />
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+
+        <div class="text" id="letter">
+            <h2>Extracted Letters</h2>
+            <div>
+                {% for word in letters %}
+                    {%for letter in word%}
+                    <img src="{{letter}}" alt="" />
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="text" id="ectractedText">
+            <h2>Recognized Text</h2>
+            {% for row in words %}
+                {%for letter in words%}
+                <p>{{word}}</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="uploadAnother" id="uploadano">
+            <h2>Upload Another Image</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" name="send_image">Upload</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+
+    <script>
+        var button = document.getElementById("Ext");
+        button.addEventListener("click", function () {
+            var extx = document.getElementById("ectractedText");
+            var formano = document.getElementById("uploadano");
+            var recog = document.getElementById("recog");
+            var letter = document.getElementById("letter");
+
+            letter.style.display = "block";
+            extx.style.display = "block";
+            formano.style.display = "block";
+            recog.style.display = "block";
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .image,
+        .text {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 80%;
+            text-align: center;
+            align-items: center;
+        }
+
+        .text {
+            display: none;
+        }
+
+        .image img {
+            max-width: 70%;
+            height: auto;
+        }
+
+        .upload {
+            margin-bottom: 20px;
+        }
+
+        .text,
+        .uploadAnother {
+            display: none;
+        }
+
+        .reveal {
+            position: static;
+            margin: 10px auto 0 auto;
+            display: block;
+        }
+    </style>
+</body>
+
+</html>
