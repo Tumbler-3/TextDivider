@@ -5,7 +5,7 @@
 The Text Divider and Recognition project is designed to process handwritten kyrgyz text through dividing kyrgyz text into words, dividing words into letters and recognizing them. This tool can be used for data preprocessing in natural language processing tasks, document analysis, and automation of text processing pipelines in kyrgyz language. This project is built with Django for the web interface.
 
 ## Project Structure
-    ```bash
+```
 TextDivider/
 ├── manage.py                  
 ├── TextDivider/
@@ -31,7 +31,7 @@ TextDivider/
 ├── requirements.txt         
 ├── README.md             
 └── LICENSE             
-    ```
+```
 
 ## Features
 - **Kyrgyz Text Division**: Spliting handwritten text into sections based on predefined delimiters or custom rules.
