@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Text Divider and Recognition
 
 ## Overview
